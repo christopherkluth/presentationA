@@ -16,6 +16,6 @@
 *.nav
 *.snm
 # Generated PDF
-praesentation.pdf
+presentation.pdf
 # System
 .DS_Store
