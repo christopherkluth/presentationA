@@ -1,0 +1,165 @@
+% Beamer als Dokumentenklasse verwenden
+\documentclass{beamer}
+
+% Kodierung dieser Datei angeben
+\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb}
+
+% Schönere Schriftart laden
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Schönere Schriftart für nicht proportionale Schrift laden
+\usepackage{courier}
+
+% Deutsche Silbentrennung verwenden
+\usepackage[ngerman]{babel}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\usetikzlibrary{positioning,shapes.geometric}
+
+% Paket für Darstellung von Quelltext laden
+\usepackage{listings}
+
+% Farbunterstützung muss in Beamer nicht explizit geladen werden
+
+% Paket für weitere Symbole laden.
+% (Wird von listings benötigt.)
+\usepackage{textcomp}
+
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\lstset{language=Java,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{javapurple}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	tabsize=4,
+	showspaces=false,
+	showstringspaces=false}
+
+
+ \usetheme{Boadilla}
+ 
+% Formeln mit Serifen setzen
+\usefonttheme[onlymath]{serif}
+
+% Navigationssynbole ausblenden
+\setbeamertemplate{navigation symbols}{}
+
+
+\title[Beispiel Präsentation]{Beispiele für Präsentationsfolien}
+\author[Christopher Kluth, Timon Wolff]{Christopher Kluth \and Timon Wolff}
+\date{Winter 2016}
+
+\begin{document}
+	\frame{\titlepage}
+	
+	
+\begin{frame}
+	Es gibt 5 verschiedene Arten von Folien
+	\begin{itemize}
+		\item Aufzählung
+		\item Textblöcke
+		\item Strukturen und Graphen
+		\item Abbildung und Diagramme
+	\end{itemize}
+\end{frame}
+	
+	
+\begin{frame}{Sandhaufensatz}
+	\begin{Satz}[Sandhaufensatz]
+		Es gibt keine Sandhaufen.
+	\end{Satz}
+		
+		
+	\begin{Beweis}
+		\begin{enumerate}
+			 \item<2-> Ein Sandkorn ist kein Sandhaufen
+			 \item<3-> Sandkörner werden durch hinzufügen eins Sandkorns, nicht zu einem Sandhaufen
+			 \item Induktiv folgt die Aussage
+		\end{enumerate}	 
+	\end{Beweis}
+\end{frame}
+	
+	
+	
+\begin{frame}{Graphen}	
+	\begin{tikzpicture}[scale=1,domain=0:5.0]
+		\draw (0,0) -- (5.0,0);
+		\draw (0,-1) -- (0,3.0);
+		\draw[->] (0,0) -- (5.0,0) node[right] {$x$}; 
+		\draw[->] (0,0) -- (0,3.0) node[above] {$f(x)$};
+			
+		\draw[blue] plot (\x,{\x/3}) node[right] {$f(x)=\frac{x}{3}$}; 
+		\draw[red] plot (\x,{exp(\x)/50}) node[right] {$f(x)=\frac{e^x}{50}$};
+		\draw[green] plot (\x,{sin(\x r)}) node[right] {$\sin \alpha$};
+	\end{tikzpicture}	
+\end{frame}
+	
+	
+\begin{frame}{Eignung von Folientypen}
+	\begin{tabular}{lrrrrr}
+		\textbf{} & \textbf{\rotatebox{60}{Verständnis}} & \textbf{\rotatebox{60}{Entscheidung}} &
+		\textbf{\rotatebox{60}{Struktur}} & \textbf{\rotatebox{60}{Abstraktion}} & \textbf{\rotatebox{60}{Vergleich}} \\
+		\hline
+		\textbf{Aufzählung} & \checkmark & & \checkmark &  & \\ \hline
+		\textbf{Abbildung}  & \checkmark & &  & \checkmark & \\ \hline
+		\textbf{Strukturen} &  & \checkmark &  & \checkmark & \checkmark \\ \hline
+		\textbf{Tabellen} &  & \checkmark &  &  & \checkmark \\ \hline			\textbf{Diagramme} & \checkmark & \checkmark & \checkmark &\checkmark  & \\
+		\hline
+	\end{tabular}
+\end{frame}
+	
+	
+	
+\begin{frame}[fragile]{Größter gemeinsamer Teiler}
+	 \begin{columns} 
+	 	\begin{column}{5cm} 
+	 		 \begin{tikzpicture}[
+	 		 io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, fill=green!10, draw=green},
+			 op/.style={rectangle, fill=blue!10, draw=blue},
+			 cn/.style={diamond, aspect=2, inner sep=2pt, fill=purple!10, draw=purple}]
+			 
+			 \node[io] (in) {Eingabe $a,b$}; 
+			 \node[op, below=of in] (div) {$s=a \mod b$}; 
+			 \node[op, below=of div] (set) {$a=b,\ b=s$}; 
+			 \node[cn, below=of set] (cond) {$b=0?$}; 
+			 \node[io, below=of cond] (out) {Ausgabe $a$};
+				 
+			 \path[->] 
+			 (in) edge (div) 
+			 (div) edge (set) 
+			 (set) edge (cond) 
+			 (cond) edge node [right]{Ja} (out);
+			 \draw[->]
+			 (cond) -- ++(1.5,0) node[below]{Nein}
+			 |- (div);
+	 		 \end{tikzpicture}
+		 		
+	 	\end{column} 
+		 	
+		 	
+		 	
+	 	\begin{column}{5cm} 
+	 		\begin{lstlisting}[gobble=4,language=Java]
+	function ggt(a,b){
+		var s;
+		while(b!=0){
+			s=a%b;
+			a=b;
+			b=s;
+		}
+		return a;
+	}
+	 		\end{lstlisting}
+		  \end{column} 		 
+		\end{columns}	 
+\end{frame}
+\end{document}
