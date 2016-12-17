@@ -19,3 +19,4 @@
 presentation.pdf
 # System
 .DS_Store
+*.pdf
