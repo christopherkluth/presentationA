@@ -11,5 +11,11 @@
 *.out
 *.toc
 *.synctex.gz
+
+*.vrb
+*.nav
+*.snm
 # Generated PDF
-presentation.pdf
+praesentation.pdf
+# System
+.DS_Store
